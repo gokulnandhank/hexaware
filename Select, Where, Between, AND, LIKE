@@ -1,0 +1,46 @@
+
+INSERT INTO Venu (Name, Location, Capacity) VALUES
+('Levis', 'Chicago', 50000),
+('Metlife', 'LA', 70000),
+('Mercedes Benz Stadium', 'USA', 18000),
+('Venu 4', 'Location 4', 18500),
+('Venu 5', 'Location 5', 16200),
+('Venu 6', 'Location 6', 29000),
+('Venu 7', 'Location 7', 85000),
+('Venu 8', 'Location 8', 55600),
+('Venu 9', 'Location 9', 76050),
+('Venu 10', 'Location 10', 94090);
+INSERT INTO Event (Name, Date, StartTime, EndTime, VenuID) VALUES
+('Event1', '2024-01-10', '18:00:00', '22:00:00', 1),
+('Event2', '2024-01-12', '19:00:00', '23:00:00', 2),
+('Event3', '2024-01-14', '20:00:00', '24:00:00', 3),
+('Event4', '2024-01-16', '21:00:00', '01:00:00', 4),
+('Event5', '2024-01-18', '22:00:00', '02:00:00', 5),
+('Event6', '2024-01-20', '23:00:00', '03:00:00', 6),
+('Event7', '2024-01-22', '24:00:00', '04:00:00', 7),
+('Event8', '2024-01-24', '01:00:00', '05:00:00', 8),
+('Event9', '2024-01-26', '02:00:00', '06:00:00', 9),
+('Event10', '2024-01-28', '03:00:00', '07:00:00', 10);
+
+INSERT INTO Customers (FirstName, LastName, Email, PhoneNumber) VALUES
+('John', 'Doe', 'john.doe@email.com', '123-456-7890'),
+('Jane', 'Smith', 'jane.smith@email.com', '234-567-8901'),
+('Steven', 'Smith', 'steven.smith@email.com', '234-507-8909'),
+('Virat', 'Kohli', 'virat.kohli@email.com', '294-557-8901'),
+('Mahendra', 'Dhoni', 'mahendra.dhoni@email.com', '777-577-7777'),
+('Ravindhra', 'Jadeja', 'ravindhra.jadeja@email.com', '238-569-8901'),
+('Sanju', 'Samson', 'sanju.samson@email.com', '234-507-8701'),
+('David', 'Warner', 'david.warner@email.com', '234-557-9903'),
+('Mithcel', 'Starc', 'mitchel.starc@email.com', '294-986-8941'),
+('Mitchel', 'Johnson', 'mitchel.johnson@email.com', '234-567-000');
+INSERT INTO Booking (EventID, CustomerID, BookingDate, NumberOfTickets) VALUES
+(1, 1, '2024-01-09', 2),
+(2, 2, '2024-01-10', 3),
+(3, 3, '2024-01-10', 4),
+(4, 4, '2024-01-10', 3),
+(5, 5, '2024-01-11', 2),
+(6, 6, '2024-01-13', 6),
+(7, 7, '2024-01-15', 8),
+(8, 8, '2024-01-16', 2),
+(9, 9, '2024-01-17', 4),
+(10, 10, '2024-01-18', 5);
