@@ -1,0 +1,71 @@
+SELECT e.EventID, e.Name, AVG(b.Price) AS AverageTicketPrice
+FROM Event e
+JOIN Booking b ON e.EventID = b.EventID
+GROUP BY e.EventID, e.Name;
+
+SELECT SUM(b.Price * b.NumberOfTickets) AS TotalRevenue
+FROM Booking b;
+
+SELECT e.EventID, e.Name, SUM(b.NumberOfTickets) AS TotalTicketsSold
+FROM Event e
+JOIN Booking b ON e.EventID = b.EventID
+GROUP BY e.EventID, e.Name
+ORDER BY TotalTicketsSold DESC
+LIMIT 1;
+
+SELECT e.EventID, e.Name, SUM(b.NumberOfTickets) AS TotalTicketsSold
+FROM Event e
+JOIN Booking b ON e.EventID = b.EventID
+GROUP BY e.EventID, e.Name;
+
+SELECT e.EventID, e.Name
+FROM Event e
+LEFT JOIN Booking b ON e.EventID = b.EventID
+WHERE b.BookingID IS NULL;
+
+SELECT CustomerID, SUM(NumberOfTickets) AS TotalTicketsBooked
+FROM Booking
+GROUP BY CustomerID
+ORDER BY TotalTicketsBooked DESC
+LIMIT 1;
+
+SELECT MONTH(b.BookingDate) AS Month, YEAR(b.BookingDate) AS Year, e.Name, SUM(b.NumberOfTickets) AS TotalTicketsSold
+FROM Booking b
+JOIN Event e ON b.EventID = e.EventID
+GROUP BY Month, Year, e.Name
+ORDER BY Year, Month;
+
+SELECT e.VenuID, v.Name AS VenueName, AVG(b.Price) AS AverageTicketPrice
+FROM Event e
+JOIN Booking b ON e.EventID = b.EventID
+JOIN Venu v ON e.VenuID = v.VenuID
+GROUP BY e.VenuID, v.Name;
+
+SELECT e.Name AS EventType, SUM(b.NumberOfTickets) AS TotalTicketsSold
+FROM Event e
+JOIN Booking b ON e.EventID = b.EventID
+GROUP BY e.Name;
+
+SELECT YEAR(b.BookingDate) AS Year, SUM(b.Price * b.NumberOfTickets) AS TotalRevenue
+FROM Booking b
+GROUP BY Year;
+
+SELECT CustomerID
+FROM Booking
+GROUP BY CustomerID
+HAVING COUNT(DISTINCT EventID) > 1;
+
+SELECT b.CustomerID, SUM(b.Price * b.NumberOfTickets) AS TotalRevenueByUser
+FROM Booking b
+GROUP BY b.CustomerID;
+
+SELECT v.Name AS Venue, e.Name AS Category, AVG(b.Price) AS AverageTicketPrice
+FROM Event e
+JOIN Booking b ON e.EventID = b.EventID
+JOIN Venu v ON e.VenuID = v.VenuID
+GROUP BY v.Name, e.Name;
+
+SELECT b.CustomerID, SUM(b.NumberOfTickets) AS TotalTicketsLast30Days
+FROM Booking b
+WHERE b.BookingDate >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
+GROUP BY b.CustomerID;
