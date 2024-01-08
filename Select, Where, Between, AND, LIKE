@@ -1,4 +1,3 @@
-
 INSERT INTO Venu (Name, Location, Capacity) VALUES
 ('Levis', 'Chicago', 50000),
 ('Metlife', 'LA', 70000),
@@ -44,3 +43,25 @@ INSERT INTO Booking (EventID, CustomerID, BookingDate, NumberOfTickets) VALUES
 (8, 8, '2024-01-16', 2),
 (9, 9, '2024-01-17', 4),
 (10, 10, '2024-01-18', 5);
+SELECT * FROM Event;
+SELECT e.EventID, e.Name, e.Date, e.StartTime, e.EndTime
+FROM Event e
+LEFT JOIN Booking b ON e.EventID = b.EventID
+GROUP BY e.EventID
+HAVING SUM(b.NumberOfTickets) < e.Capacity;
+SELECT * FROM Event WHERE Name LIKE '%cup%';
+SELECT * FROM Event WHERE Price BETWEEN 1000 AND 2500;
+SELECT * FROM Event 
+WHERE Date BETWEEN '2024-01-10' AND '2024-01-20';
+SELECT e.* 
+FROM Event e
+JOIN Booking b ON e.EventID = b.EventID
+WHERE e.Name LIKE '%Concert%'
+GROUP BY e.EventID
+HAVING SUM(b.NumberOfTickets) < e.Capacity;
+SELECT * FROM Customers 
+LIMIT 5 OFFSET 5;
+SELECT * FROM Booking WHERE NumberOfTickets > 4;
+SELECT * FROM Customers WHERE PhoneNumber LIKE '%000';
+SELECT * FROM Event WHERE Capacity > 15000 ORDER BY Capacity DESC;
+SELECT * FROM Event WHERE Name NOT LIKE 'x%' AND Name NOT LIKE 'y%' AND Name NOT LIKE 'z%';
