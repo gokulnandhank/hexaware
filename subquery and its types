@@ -1,0 +1,65 @@
+SELECT v.Name AS Venue, 
+       (SELECT AVG(b.Price) 
+        FROM Event e 
+        JOIN Booking b ON e.EventID = b.EventID 
+        WHERE e.VenuID = v.VenuID) AS AverageTicketPrice
+FROM Venu v;
+
+SELECT e.Name
+FROM Event e
+WHERE (SELECT SUM(NumberOfTickets) FROM Booking WHERE EventID = e.EventID) > 0.5 * Capacity;
+
+SELECT e.Name,
+       (SELECT SUM(NumberOfTickets) FROM Booking WHERE EventID = e.EventID) AS TotalTicketsSold
+FROM Event e;
+
+SELECT CustomerID, FirstName, LastName
+FROM Customers c
+WHERE NOT EXISTS (
+    SELECT 1 FROM Booking WHERE CustomerID = c.CustomerID
+);
+
+SELECT EventID, Name
+FROM Event
+WHERE EventID NOT IN (SELECT DISTINCT EventID FROM Booking);
+
+SELECT EventType, SUM(TotalTickets) AS TotalTicketsSold
+FROM (
+    SELECT e.Name AS EventType, SUM(b.NumberOfTickets) AS TotalTickets
+    FROM Event e
+    JOIN Booking b ON e.EventID = b.EventID
+    GROUP BY e.Name
+) AS subquery
+GROUP BY EventType;
+
+SELECT Name, Price
+FROM Booking b
+WHERE Price > (SELECT AVG(Price) FROM Booking);
+
+SELECT c.FirstName, c.LastName,
+       (SELECT SUM(b.Price * b.NumberOfTickets) 
+        FROM Booking b 
+        WHERE b.CustomerID = c.CustomerID) AS TotalRevenueByUser
+FROM Customers c;
+
+SELECT DISTINCT c.FirstName, c.LastName
+FROM Customers c
+WHERE EXISTS (
+    SELECT 1 FROM Booking b 
+    JOIN Event e ON b.EventID = e.EventID 
+    WHERE e.VenuID = (SELECT VenuID FROM Venu WHERE Name = 'GivenVenueName') 
+    AND b.CustomerID = c.CustomerID
+);
+
+SELECT e.Name AS Category, SUM(b.NumberOfTickets) AS TotalTicketsSold
+FROM Event e
+JOIN Booking b ON e.EventID = b.EventID
+GROUP BY e.Name;
+
+SELECT v.Name AS Venue, 
+       (SELECT AVG(b.Price) 
+        FROM Event e 
+        JOIN Booking b ON e.EventID = b.EventID 
+        WHERE e.VenuID = v.VenuID) AS AverageTicketPrice
+FROM Venu v;
+
